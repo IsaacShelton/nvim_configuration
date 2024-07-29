@@ -92,9 +92,6 @@ end
 -- Minimal number of screen lines to keep above and below the cursor.
 -- vim.opt.scrolloff = 10
 
--- [[ Basic Keymaps ]]
---  See `:help vim.keymap.set()`
-
 -- Disable automatic comment continuation
 vim.api.nvim_create_autocmd('FileType', {
   pattern = '*',
@@ -122,9 +119,6 @@ vim.keymap.set({ 'i' }, '<C-h>', '<left>', { desc = 'Move left in insert mode' }
 vim.keymap.set({ 'i' }, '<C-k>', '<up>', { desc = 'Move up in insert mode' })
 vim.keymap.set({ 'i' }, '<C-j>', '<down>', { desc = 'Move down in insert mode' })
 
--- Diagnostic keymaps
--- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
 vim.keymap.set('n', '<leader>a', '<cmd> Telescope find_files <CR>', { desc = 'Find files' })
 vim.keymap.set('n', '<leader>q', '<cmd> Telescope diagnostics <CR>', { desc = 'List all diagnostics' })
 vim.keymap.set('n', '<leader>1', '<cmd> Telescope diagnostics severity=1<CR>', { desc = 'List error diagnostics' })
@@ -141,12 +135,11 @@ vim.keymap.set('n', '<leader>fc', '<cmd> Telescope git_commits<CR>', { desc = 'F
 vim.keymap.set('n', '<leader>ft', '<cmd> Telescope git_status<CR>', { desc = 'Find status' })
 vim.keymap.set('n', '<leader>fm', '<cmd> Telescope marks<CR>', { desc = 'Find bookmark' })
 
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
+-- Use CTRL+<hjkl> to switch between windows
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the below window' })
+vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the above window' })
 
 -- Use tab/shift-tab to cycle between buffers
 vim.keymap.set('n', '<tab>', '<CMD>bnext<CR>', { desc = 'Goto next tab' })
@@ -523,7 +516,6 @@ require('lazy').setup({
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
-      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', opts = {} },
 
       -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
@@ -551,7 +543,7 @@ require('lazy').setup({
           map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
           map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
           map('gi', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-          map('<leader>gT', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+          map('<leader>gT', require('telescope.builtin').lsp_type_definitions, '[T]ype Definition')
           map('<leader>S', require('telescope.builtin').lsp_document_symbols, 'Document [S]ymbols')
           map('<leader>ra', vim.lsp.buf.rename, '[R]en[a]me')
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
@@ -678,9 +670,6 @@ require('lazy').setup({
 
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        -- Used to format Lua code
-        'stylua',
-
         -- lua stuff
         'lua-language-server',
         'stylua',
