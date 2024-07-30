@@ -197,6 +197,9 @@ vim.keymap.set('n', '', 'V')
 vim.keymap.set({ 'n', 'i', 'x', 'v' }, 'ø', '<cmd>Ouroboros<CR>', { desc = 'Switch header/source' })
 vim.keymap.set({ 'n', 'i', 'x', 'v' }, 'Ø', '<cmd>ClangdSwitchSourceHeader<CR>', { desc = 'Switch header/source (heavy)' })
 
+-- Keymap for inserting a module comment
+vim.keymap.set('n', 'µ', require 'insert_module_comment', { desc = 'Insert module comment' })
+
 --- HACK: Override `vim.lsp.util.stylize_markdown` to use Treesitter.
 -- <https://github.com/hrsh7th/nvim-cmp/issues/1699#issuecomment-1738132283>
 ---@param bufnr integer
