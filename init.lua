@@ -573,7 +573,7 @@ require('lazy').setup({
           map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
           map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
           map('gi', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-          map('<leader>gT', require('telescope.builtin').lsp_type_definitions, '[T]ype Definition')
+          map('gt', require('telescope.builtin').lsp_type_definitions, '[T]ype Definition')
           map('<leader>S', require('telescope.builtin').lsp_document_symbols, 'Document [S]ymbols')
           map('<leader>ra', vim.lsp.buf.rename, '[R]en[a]me')
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
