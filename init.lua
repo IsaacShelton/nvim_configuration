@@ -745,6 +745,7 @@ require('lazy').setup({
     lazy = false,
   },
 
+  {
     'luckasRanarison/clear-action.nvim',
     opts = {
       silent = true, -- dismiss code action requests errors
