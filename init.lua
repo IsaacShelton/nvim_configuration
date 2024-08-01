@@ -272,10 +272,7 @@ require('lazy').setup({
 
   {
     'max397574/better-escape.nvim',
-    event = 'InsertEnter',
-    config = function()
-      require('better_escape').setup()
-    end,
+    opts = { default_mappings = false },
   },
 
   {
@@ -576,8 +573,8 @@ require('lazy').setup({
           map('gt', require('telescope.builtin').lsp_type_definitions, '[T]ype Definition')
           map('<leader>S', require('telescope.builtin').lsp_document_symbols, 'Document [S]ymbols')
           map('<leader>ra', vim.lsp.buf.rename, '[R]en[a]me')
-          map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+          vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { buffer = event.buf, desc = '[C]ode [A]ction' })
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
@@ -748,7 +745,6 @@ require('lazy').setup({
     lazy = false,
   },
 
-  {
     'luckasRanarison/clear-action.nvim',
     opts = {
       silent = true, -- dismiss code action requests errors
