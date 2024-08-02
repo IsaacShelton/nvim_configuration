@@ -147,6 +147,10 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the above win
 vim.keymap.set('n', '<tab>', '<CMD>bnext<CR>', { desc = 'Goto next tab' })
 vim.keymap.set('n', '<S-tab>', '<CMD>bprev<CR>', { desc = 'Goto previous tab' })
 
+-- Use <leader>p and <leader>P to paste the last yanked item
+vim.keymap.set({ 'n', 'v' }, '<leader>p', '"0p', { desc = 'Paste last yanked item' })
+vim.keymap.set({ 'n', 'v' }, '<leader>P', '"0P', { desc = 'Paste last yanked item behind' })
+
 -- Keymap to toggle between dark/light theme
 vim.keymap.set('n', '<leader>th', function()
   print 'toggling'
