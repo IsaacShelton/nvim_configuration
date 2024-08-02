@@ -101,8 +101,10 @@ vim.api.nvim_create_autocmd('FileType', {
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
-vim.keymap.set('n', '<leader>;', '<cmd>w<CR>')
-vim.keymap.set('n', '<leader>:', '<cmd>wqa<CR>')
+-- Set custom save shortcuts
+vim.keymap.set('n', '<leader>;', '<cmd>w<CR>', { desc = 'Write file' })
+vim.keymap.set('n', '<leader>:', '<cmd>wqa<CR>', { desc = 'Write all files and quit' })
+vim.keymap.set('n', '<leader>o', '<cmd>noautocmd w<CR>', { desc = 'Write file skipping autocommands' })
 
 -- Nicities and spider
 vim.keymap.set({ 'n', 'v' }, '∆', '}')
@@ -1213,12 +1215,44 @@ require('lazy').setup({
   -- Plugin for deleting buffers without the windows they occupy
   {
     'famiu/bufdelete.nvim',
+    dependencies = {
+      'akinsho/bufferline.nvim',
+    },
     opts = {},
     config = function()
       -- Allow for <leader>x to close current buffer
       vim.keymap.set('n', '<leader>x', function()
         require('bufdelete').bufdelete(0)
       end, { desc = 'Close current buffer' })
+
+      -- Allow for <leader>X to close all normal buffers
+      vim.keymap.set('n', '<leader>X', function()
+        local elements = require('bufferline').get_elements().elements
+        local bufdelete = require('bufdelete').bufdelete
+
+        if #elements == 0 then
+          bufdelete(0)
+        end
+
+        for _, element in ipairs(elements) do
+          bufdelete(element.id)
+        end
+      end, { desc = 'Close all (normal) buffers' })
+
+      -- Allow for <leader>K to close all normal buffers except the current one
+      vim.keymap.set('n', '<leader>K', function()
+        local elements = require('bufferline').get_elements().elements
+        local bufdelete = require('bufdelete').bufdelete
+        local current_id = vim.api.nvim_get_current_buf()
+
+        for _, element in ipairs(elements) do
+          if element.id ~= current_id then
+            bufdelete(element.id)
+          end
+        end
+      end, { desc = 'Close all (normal) buffers except the current one' })
+
+      -- Done setting up bufdelete keymaps
     end,
   },
 
