@@ -159,6 +159,13 @@ end, { desc = 'Toggle dark/light theme' })
 vim.keymap.set({ 'n', 'x', 'v' }, '<leader>d', 'dd', { desc = 'Fast delete line' })
 
 -- [[ Keymaps for jumping between different kinds of diagnostics ]]
+vim.keymap.set({ 'n' }, ']d', function()
+  vim.diagnostic.goto_next()
+end, { desc = 'Go to next diagnostic' })
+vim.keymap.set({ 'n' }, '[d', function()
+  vim.diagnostic.goto_prev()
+end, { desc = 'Go to previous diagnostic' })
+
 vim.keymap.set({ 'n' }, ']1', function()
   vim.diagnostic.goto_next { severity = 1 }
 end, { desc = 'Go to next error' })
@@ -746,7 +753,7 @@ require('lazy').setup({
   },
 
   {
-    'luckasRanarison/clear-action.nvim',
+    'IsaacShelton/clear-action.nvim',
     opts = {
       silent = true, -- dismiss code action requests errors
       signs = {
