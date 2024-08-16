@@ -74,6 +74,7 @@ do
     signs = { text = { [x.ERROR] = symbols.ERROR, [x.WARN] = symbols.WARN, [x.INFO] = symbols.INFO, [x.HINT] = symbols.HINT } },
     underline = true,
     float = { border = 'single' },
+    update_in_insert = true,
   }
 
   local signs = {
