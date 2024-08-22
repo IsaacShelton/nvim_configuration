@@ -106,6 +106,7 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '<leader>;', '<cmd>w<CR>', { desc = 'Write file' })
 vim.keymap.set('n', '<leader>:', '<cmd>wqa<CR>', { desc = 'Write all files and quit' })
 vim.keymap.set('n', '<leader>o', '<cmd>noautocmd w<CR>', { desc = 'Write file skipping autocommands' })
+vim.keymap.set('n', "<leader>'", '<cmd>noautocmd w<CR>', { desc = 'Write file skipping autocommands' })
 
 -- Nicities and spider
 vim.keymap.set({ 'n', 'v' }, '∆', '}')
