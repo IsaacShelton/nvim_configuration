@@ -827,6 +827,7 @@ require('lazy').setup({
             ['Import'] = '<leader>m',
             ['Fill match arms'] = '<leader>F',
             ['Fill struct fields'] = '<leader>G',
+            ['Remove all the unused imports'] = '<leader>.',
           },
         },
       },
@@ -1515,6 +1516,44 @@ require('lazy').setup({
           replace = 'gsr', -- Replace surrounding
           update_n_lines = 'gsn', -- Update `n_lines`
         },
+      }
+    end,
+  },
+
+  -- Usage count helpers plugin
+  {
+    'Wansmer/symbol-usage.nvim',
+    event = 'LspAttach',
+    config = function()
+      ---@diagnostic disable-next-line: missing-fields
+      require('symbol-usage').setup {
+        hl = { link = 'Comment' },
+        vt_position = 'end_of_line',
+        implementation = { enabled = true },
+        request_pending_text = ' — ',
+        text_format = function(symbol)
+          local fragments = {}
+
+          -- Indicator that shows if there are any other symbols in the same line
+          local stacked_functions = symbol.stacked_count > 0 and (' | +%s'):format(symbol.stacked_count) or ''
+
+          if symbol.references then
+            local usage = symbol.references <= 1 and 'usage' or 'usages'
+            local num = symbol.references == 0 and 'no' or symbol.references
+            table.insert(fragments, ('%s %s'):format(num, usage))
+          end
+
+          if symbol.definition then
+            table.insert(fragments, symbol.definition .. ' defs')
+          end
+
+          -- Only for not functions/methods
+          if symbol.implementation and symbol.kind ~= 12 and symbol.kind ~= 6 then
+            table.insert(fragments, symbol.implementation .. ' impls')
+          end
+
+          return ' — ' .. table.concat(fragments, ', ') .. stacked_functions
+        end,
       }
     end,
   },
