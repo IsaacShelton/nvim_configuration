@@ -824,7 +824,7 @@ require('lazy').setup({
         actions = {
           -- example:
           ['rust_analyzer'] = {
-            ['Import'] = '<leader>m',
+            ['Import'] = '<leader>h',
             ['Fill match arms'] = '<leader>F',
             ['Fill struct fields'] = '<leader>G',
             ['Remove all the unused imports'] = '<leader>.',
@@ -1264,6 +1264,7 @@ require('lazy').setup({
   },
 
   -- My bufferline plugin I like
+  --[[
   {
     'akinsho/bufferline.nvim',
     version = '4.7.0',
@@ -1282,6 +1283,27 @@ require('lazy').setup({
     },
     config = function(_, opts)
       require('bufferline').setup(opts)
+    end,
+  },
+  ]]
+  {
+    'ramilito/winbar.nvim',
+    event = 'VimEnter', -- Alternatively, BufReadPre if we don't care about the empty file when starting with 'nvim'
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      require('winbar').setup {
+        icons = true,
+        diagnostics = true,
+        dir_levels = 1,
+        buf_modified = true,
+        buf_modified_symbol = '●',
+        dim_inactive = {
+          enabled = false,
+          highlight = 'WinbarNC',
+          icons = true, -- whether to dim the icons
+          name = true, -- whether to dim the name
+        },
+      }
     end,
   },
 
@@ -1547,8 +1569,7 @@ require('lazy').setup({
             table.insert(fragments, symbol.definition .. ' defs')
           end
 
-          -- Only for not functions/methods
-          if symbol.implementation and symbol.kind ~= 12 and symbol.kind ~= 6 then
+          if symbol.implementation then
             table.insert(fragments, symbol.implementation .. ' impls')
           end
 
@@ -1598,7 +1619,6 @@ require('lazy').setup({
       require('nvim-treesitter.configs').setup(opts)
     end,
   },
-
   require 'plugins.autopairs',
   require 'plugins.gitsigns',
 }, {
