@@ -1209,6 +1209,7 @@ require('lazy').setup({
       },
     },
   },
+  { 'kazhala/close-buffers.nvim' },
 
   -- Plugin for light theme alternative
   {
@@ -1228,7 +1229,8 @@ require('lazy').setup({
   {
     'famiu/bufdelete.nvim',
     dependencies = {
-      'akinsho/bufferline.nvim',
+      -- 'akinsho/bufferline.nvim',
+      'kazhala/close-buffers.nvim',
     },
     opts = {},
     config = function()
@@ -1239,29 +1241,12 @@ require('lazy').setup({
 
       -- Allow for <leader>X to close all normal buffers
       vim.keymap.set('n', '<leader>X', function()
-        local elements = require('bufferline').get_elements().elements
-        local bufdelete = require('bufdelete').bufdelete
-
-        if #elements == 0 then
-          bufdelete(0)
-        end
-
-        for _, element in ipairs(elements) do
-          bufdelete(element.id)
-        end
+        require('close_buffers').delete { type = 'all' }
       end, { desc = 'Close all (normal) buffers' })
 
       -- Allow for <leader>K to close all normal buffers except the current one
       vim.keymap.set('n', '<leader>K', function()
-        local elements = require('bufferline').get_elements().elements
-        local bufdelete = require('bufdelete').bufdelete
-        local current_id = vim.api.nvim_get_current_buf()
-
-        for _, element in ipairs(elements) do
-          if element.id ~= current_id then
-            bufdelete(element.id)
-          end
-        end
+        require('close_buffers').delete { type = 'hidden' }
       end, { desc = 'Close all (normal) buffers except the current one' })
 
       -- Done setting up bufdelete keymaps
