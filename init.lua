@@ -125,6 +125,7 @@ vim.keymap.set({ 'i' }, '<C-j>', '<down>', { desc = 'Move down in insert mode' }
 
 vim.keymap.set('n', '<leader>a', '<cmd> Telescope find_files <CR>', { desc = 'Find files' })
 vim.keymap.set('n', '<leader>q', '<cmd> Telescope diagnostics <CR>', { desc = 'List all diagnostics' })
+vim.keymap.set('n', '<leader>z', '<cmd> Telescope diagnostics severity=1<CR>', { desc = 'List error diagnostics' })
 vim.keymap.set('n', '<leader>1', '<cmd> Telescope diagnostics severity=1<CR>', { desc = 'List error diagnostics' })
 vim.keymap.set('n', '<leader>2', '<cmd> Telescope diagnostics severity=2<CR>', { desc = 'List warning diagnostics' })
 vim.keymap.set('n', '<leader>3', '<cmd> Telescope diagnostics severity=3<CR>', { desc = 'List info diagnostics' })
@@ -395,6 +396,10 @@ require('lazy').setup({
               ['<Tab>'] = require('telescope.actions').move_selection_next,
               ['<S-Tab>'] = require('telescope.actions').move_selection_previous,
               ['å'] = require('telescope.actions').toggle_selection + require('telescope.actions').move_selection_next,
+              [',z'] = function(bufnr)
+                require('telescope.actions').close(bufnr)
+                vim.cmd 'Telescope diagnostics severity=1'
+              end,
               [',1'] = function(bufnr)
                 require('telescope.actions').close(bufnr)
                 vim.cmd 'Telescope diagnostics severity=1'
