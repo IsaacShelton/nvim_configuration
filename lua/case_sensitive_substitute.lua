@@ -48,32 +48,27 @@ local function smart_sub(line, from, to)
     return nil
   end
 
-  -- print(new_line)
   return new_line
 end
 
-vim.api.nvim_create_user_command(
-  'S',
-  function(opts)
-    local from = opts.fargs[1]
-    local to = opts.fargs[2]
+vim.api.nvim_create_user_command('S', function(opts)
+  local from = opts.fargs[1]
+  local to = opts.fargs[2]
 
-    if from == nil or to == nil then
-      vim.api.nvim_err_writeln 'No enough arguments'
-      return
+  if from == nil or to == nil then
+    vim.api.nvim_err_writeln 'No enough arguments'
+    return
+  end
+
+  local lines = vim.api.nvim_buf_get_lines(0, opts.line1 - 1, opts.line2, false)
+
+  local lineNumber = opts.line1
+  for _, line in ipairs(lines) do
+    local modified_line = smart_sub(line, from, to)
+
+    if modified_line ~= nil then
+      vim.api.nvim_buf_set_lines(0, lineNumber - 1, lineNumber, false, { modified_line })
     end
-
-    local lines = vim.api.nvim_buf_get_lines(0, opts.line1 - 1, opts.line2, false)
-
-    local lineNumber = opts.line1
-    for _, line in ipairs(lines) do
-      local modified_line = smart_sub(line, from, to)
-
-      if modified_line ~= nil then
-        vim.api.nvim_buf_set_lines(0, lineNumber - 1, lineNumber, false, { modified_line })
-      end
-      lineNumber = lineNumber + 1
-    end
-  end,
-  { nargs = '+', range = '%', desc = 'Case-Sensitive Word Substitution' } -- Options: number of args, range, etc.
-)
+    lineNumber = lineNumber + 1
+  end
+end, { nargs = '+', range = '%', desc = 'Case-Sensitive Word Substitution' })
