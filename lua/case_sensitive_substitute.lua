@@ -56,7 +56,7 @@ vim.api.nvim_create_user_command('S', function(opts)
   local to = opts.fargs[2]
 
   if from == nil or to == nil then
-    vim.api.nvim_err_writeln 'No enough arguments'
+    vim.api.nvim_err_writeln 'Not enough arguments'
     return
   end
 
