@@ -215,6 +215,7 @@ vim.keymap.set({ 'n', 'i', 'x', 'v' }, 'Ø', '<cmd>ClangdSwitchSourceHeader<CR>'
 
 -- Keymap for inserting a module comment
 vim.keymap.set('n', 'µ', require 'insert_module_comment', { desc = 'Insert module comment' })
+require 'case_sensitive_substitute'
 
 --- HACK: Override `vim.lsp.util.stylize_markdown` to use Treesitter.
 -- <https://github.com/hrsh7th/nvim-cmp/issues/1699#issuecomment-1738132283>

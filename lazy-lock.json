@@ -1,5 +1,5 @@
 {
-  "AdeptVim": { "branch": "master", "commit": "b8e0d753dafa16d5c77ab602e5a558339b09ceed" },
+  "AdeptVim": { "branch": "master", "commit": "68b7b1655b22b904380d226cca6d416aef5f2c03" },
   "Comment.nvim": { "branch": "master", "commit": "e30b7f2008e52442154b66f7c519bfd2f1e32acb" },
   "LuaSnip": { "branch": "master", "commit": "c9b9a22904c97d0eb69ccb9bab76037838326817" },
   "alpha-nvim": { "branch": "main", "commit": "de72250e054e5e691b9736ee30db72c65d560771" },
