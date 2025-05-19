@@ -157,7 +157,15 @@ vim.keymap.set({ 'n', 'v' }, '<leader>P', '"0P', { desc = 'Paste last yanked ite
 -- Table flip for comedic effect
 vim.keymap.set('n', '<leader>fml', '<cmd>CellularAutomaton make_it_rain<CR>')
 
--- Keymap to toggle between dark/light theme
+-- Auto-fix rust imports
+vim.keymap.set('n', '<leader>m', function()
+  require 'auto_import_all' 'loose'
+end)
+vim.keymap.set('n', '<leader>M', function()
+  require 'auto_import_all' 'strict'
+end)
+
+-- Keymap to toggle betweem dark/light theme
 vim.keymap.set('n', '<leader>th', function()
   print 'toggling'
   if vim.g.colors_name == 'nord' then
