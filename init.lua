@@ -154,6 +154,9 @@ vim.keymap.set('n', '<S-tab>', '<CMD>bprev<CR>', { desc = 'Goto previous tab' })
 vim.keymap.set({ 'n', 'v' }, '<leader>p', '"0p', { desc = 'Paste last yanked item' })
 vim.keymap.set({ 'n', 'v' }, '<leader>P', '"0P', { desc = 'Paste last yanked item behind' })
 
+-- Table flip for comedic effect
+vim.keymap.set('n', '<leader>fml', '<cmd>CellularAutomaton make_it_rain<CR>')
+
 -- Keymap to toggle between dark/light theme
 vim.keymap.set('n', '<leader>th', function()
   print 'toggling'
@@ -1568,6 +1571,10 @@ require('lazy').setup({
         end,
       }
     end,
+  },
+
+  {
+    'eandrju/cellular-automaton.nvim',
   },
 
   {
