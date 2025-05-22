@@ -157,6 +157,10 @@ vim.keymap.set({ 'n', 'v' }, '<leader>P', '"0P', { desc = 'Paste last yanked ite
 -- Table flip for comedic effect
 vim.keymap.set('n', '<leader>fml', '<cmd>CellularAutomaton make_it_rain<CR>')
 
+-- :q takes too long to type
+vim.keymap.set('n', '<leader>v', '<CMD>q<CR>', { desc = 'Back out' })
+vim.keymap.set('n', '<leader>V', '<CMD>q!<CR>', { desc = 'Bolt out' })
+
 -- Auto-fix rust imports
 vim.keymap.set('n', '<leader>m', function()
   require 'auto_import_all' 'loose'
@@ -1586,6 +1590,11 @@ require('lazy').setup({
   },
 
   {
+    'vxpm/ferris.nvim',
+    opts = {},
+  },
+
+  {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
@@ -1616,6 +1625,15 @@ require('lazy').setup({
         additional_vim_regex_highlighting = { 'ruby' },
       },
       indent = { enable = true, disable = { 'ruby' } },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = 'gl',
+          node_incremental = 'gl',
+          scope_incremental = false,
+          node_decremental = 'gp',
+        },
+      },
     },
     config = function(_, opts)
       -- Prefer git instead of curl in order to improve connectivity in some environments
