@@ -99,6 +99,20 @@ vim.api.nvim_create_autocmd('FileType', {
   command = 'setlocal formatoptions-=ro',
 })
 
+-- Jump to global mark
+vim.keymap.set('n', 'å', "'A")
+vim.keymap.set('n', '®', "'R")
+vim.keymap.set('n', 'ß', "'S")
+vim.keymap.set('n', '†', "'T")
+vim.keymap.set('n', '∂', "'D")
+
+-- Place global mark
+vim.keymap.set('n', 'Å', 'mA')
+vim.keymap.set('n', '‰', 'mR')
+vim.keymap.set('n', 'Í', 'mS')
+vim.keymap.set('n', 'ˇ', 'mT')
+vim.keymap.set('n', 'Î', 'mD')
+
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
