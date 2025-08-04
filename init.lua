@@ -570,8 +570,8 @@ require('lazy').setup({
           local sources = {
 
             -- webdev stuff
-            b.formatting.deno_fmt,
-            b.formatting.prettier.with { filetypes = { 'html', 'markdown', 'css' } },
+            -- b.formatting.deno_fmt,
+            -- b.formatting.prettier.with { filetypes = { 'html', 'markdown', 'css' } },
 
             -- Lua
             b.formatting.stylua,
@@ -755,8 +755,8 @@ require('lazy').setup({
         'css-lsp',
         'html-lsp',
         'typescript-language-server',
-        'deno',
-        'prettier',
+        -- 'deno',
+        -- 'prettier',
 
         -- c/cpp stuff
         'clangd',
@@ -862,7 +862,7 @@ require('lazy').setup({
             ['Import'] = '<leader>h',
             ['Fill match arms'] = '<leader>F',
             ['Fill struct fields'] = '<leader>G',
-            ['Remove all the unused imports'] = '<leader>.',
+            ['Remove all unused imports'] = '<leader>.',
           },
         },
       },
