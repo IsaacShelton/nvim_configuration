@@ -785,7 +785,7 @@ require('lazy').setup({
     end,
   },
 
-  { 'https://github.com/IsaacShelton/AdeptVim', lazy = false },
+  { 'https://github.com/IsaacShelton/AdeptVim', branch = 'adept3', lazy = false },
 
   {
     'jakemason/ouroboros',
