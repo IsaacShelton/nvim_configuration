@@ -115,6 +115,8 @@ vim.keymap.set('n', 'Î', 'mD')
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+-- We need to have a separate mapping for <C-i> since <C-i> conflicts with <TAB>
 vim.keymap.set('n', '<C-y>', '<C-i>')
 
 -- Set custom save shortcuts
