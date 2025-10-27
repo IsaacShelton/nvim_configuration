@@ -115,6 +115,7 @@ vim.keymap.set('n', 'Î', 'mD')
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', '<C-y>', '<C-i>')
 
 -- Set custom save shortcuts
 vim.keymap.set('n', '<leader>;', '<cmd>w<CR>', { desc = 'Write file' })
