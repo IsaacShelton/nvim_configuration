@@ -14,6 +14,20 @@ vim.opt.ruler = false
 vim.opt.relativenumber = true
 vim.opt.termguicolors = true
 
+-- Insert single character before/after current character
+local function insert_char(mode)
+  local c = vim.fn.getchar()
+  local ch = type(c) == 'number' and vim.fn.nr2char(c) or c
+  vim.cmd.normal { mode .. ch, bang = true }
+end
+
+vim.keymap.set('n', 'ç', function()
+  insert_char 'i'
+end)
+vim.keymap.set('n', '∂', function()
+  insert_char 'a'
+end)
+
 -- Goto previous/next line with h,l,left arrow and right arrow when cursor reaches end/beginning of line
 vim.opt.whichwrap:append '<>[]hl'
 
@@ -100,18 +114,18 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 -- Jump to global mark
-vim.keymap.set('n', 'å', "'A")
-vim.keymap.set('n', '®', "'R")
-vim.keymap.set('n', 'ß', "'S")
-vim.keymap.set('n', '†', "'T")
-vim.keymap.set('n', '∂', "'D")
+vim.keymap.set('n', 'å', "'Azz")
+vim.keymap.set('n', '®', "'Rzz")
+vim.keymap.set('n', 'ß', "'Szz")
+vim.keymap.set('n', '†', "'Tzz")
+-- vim.keymap.set('n', '∂', "'D")
 
 -- Place global mark
 vim.keymap.set('n', 'Å', 'mA')
 vim.keymap.set('n', '‰', 'mR')
 vim.keymap.set('n', 'Í', 'mS')
 vim.keymap.set('n', 'ˇ', 'mT')
-vim.keymap.set('n', 'Î', 'mD')
+-- vim.keymap.set('n', 'Î', 'mD')
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
@@ -1566,6 +1580,7 @@ require('lazy').setup({
   },
 
   -- Usage count helpers plugin
+  --[[
   {
     'Wansmer/symbol-usage.nvim',
     event = 'LspAttach',
@@ -1601,6 +1616,7 @@ require('lazy').setup({
       }
     end,
   },
+  ]]
 
   {
     'eandrju/cellular-automaton.nvim',
