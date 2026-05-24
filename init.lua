@@ -14,6 +14,16 @@ vim.opt.ruler = false
 vim.opt.relativenumber = true
 vim.opt.termguicolors = true
 
+-- Vim ootb syntax highlighting sucks and does not refresh correctly
+local timer = vim.uv.new_timer()
+timer:start(
+  0,
+  500,
+  vim.schedule_wrap(function()
+    vim.cmd 'syntax sync fromstart'
+  end)
+)
+
 -- Insert single character before/after current character
 local function insert_char(mode)
   local c = vim.fn.getchar()
