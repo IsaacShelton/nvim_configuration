@@ -328,6 +328,7 @@ require('lazy').setup({
       require('treesitter-context').setup(opts)
       local colors = require('nord.colors').palette
 
+      vim.api.nvim_set_hl(0, 'Type', { fg = colors.frost.polar_water })
       vim.api.nvim_set_hl(0, 'TreesitterContext', { bg = colors.polar_night.brightest })
       vim.api.nvim_set_hl(0, 'TreesitterContextLineNumber', { bg = colors.polar_night.brightest })
     end,
