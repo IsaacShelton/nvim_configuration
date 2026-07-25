@@ -8,6 +8,7 @@ return {
   },
   config = function(_, opts)
     require('nvim-autopairs').setup(opts)
+    require('nvim-autopairs').remove_rule "'"
 
     local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
     local cmp = require 'cmp'
